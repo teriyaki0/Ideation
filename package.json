@@ -1,0 +1,9 @@
+{
+  "name": "ideation",
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "webapp"
+  ],
+  "private": true
+}

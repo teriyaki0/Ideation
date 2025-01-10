@@ -1,0 +1,13 @@
+node_modules
+
+/.env
+
+.idea
+
+build
+
+logs
+
+yarn-error.log
+
+pg_data
