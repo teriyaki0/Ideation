@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development dotenv -e .env -- nodemon --watch \"./src/**/*\" --watch \"./config/config.yml\" --signal SIGTERM --exec node -r @swc-node/register ./src/app.ts",
+    "start:dev": "cross-env NODE_ENV=development dotenv -e .env nodemon --watch \"./src/**/*\" --watch \"./config/config.yml\" --signal SIGTERM --exec tsx ./src/app.ts",
     "start:prod": "cross-env NODE_ENV=production node build/app.js",
     "build:prod": "tsc && npx swc ./src -d build",
-    "lint": "eslint ./src --ext .ts"
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts ."
   },
   "keywords": [],
   "author": "",
