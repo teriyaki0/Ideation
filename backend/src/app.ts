@@ -2,11 +2,10 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import cors from "cors";
 import Express from "express";
 
+import { config } from "./config";
 import { trpcRouter } from "./trpc";
-import { config } from "@/config";
 
 const app = Express();
-
 app.use(cors());
 
 app.use(
