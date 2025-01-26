@@ -1,0 +1,19 @@
+@use "../../styles/_vars" as *;
+@use "../../styles/_mixins" as *;
+
+.alert {
+  padding: 10px;
+  border-radius: $borderRadiusSmall;
+
+  &.error {
+    background-color: #ffd1d1;
+    color: #912323;
+    border: 1px solid #912323;
+  }
+
+  &.success {
+    background-color: #d7ffd7;
+    color: #509450;
+    border: 1px solid #509450;
+  }
+}

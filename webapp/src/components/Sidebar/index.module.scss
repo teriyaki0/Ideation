@@ -1,0 +1,60 @@
+@use "../../styles/vars" as *;
+@use "../../styles/mixins" as *;
+
+.sidebar {
+  position: sticky; // Добавляем фиксированное позиционирование
+  top: 0; // Привязываем к верхнему краю
+  left: 0;
+  height: 100vh;
+  padding: 25px;
+  box-sizing: border-box;
+  transition: width 0.3s ease, padding 0.3s ease;
+  &.open {
+    width: 335px;
+  }
+  .burger {
+    @include link;
+    margin-bottom: 20px;
+
+    svg {
+      fill: $blue;
+      &:hover {
+        fill: $pink;
+      }
+    }
+  }
+
+  .menu {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+
+    &.open {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .list {
+      list-style: none;
+      padding: 10px 20px;
+      margin: 0;
+      transition: opacity 0.3s ease;
+
+      .item {
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .link {
+          @include link;
+        }
+
+        .logout {
+          color: $red;
+        }
+      }
+    }
+  }
+}
