@@ -17,10 +17,9 @@
     "noImplicitThis": true,
     "strictBindCallApply": true,
     "allowUnreachableCode": false,
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"],
-      "@types": ["./types"]
+      "@*": ["./src/*"]
     },
     "types": ["@types/node"]
   },

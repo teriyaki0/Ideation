@@ -3,3 +3,7 @@ node_modules
 yarn-error.log
 
 .vscode
+
+pg_data
+
+/.env

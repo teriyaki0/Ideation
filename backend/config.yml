@@ -5,7 +5,7 @@ http:
 postgres:
   user: postgres
   password: '12345678'
-  db: dev
+  db: db
   host: 127.0.0.1
   port: 5432
 

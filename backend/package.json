@@ -4,10 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development dotenv -e .env nodemon --watch \"./src/**/*\" --watch \"./config/config.yml\" --signal SIGTERM --exec tsx ./src/app.ts",
+    "start:dev": "cross-env NODE_ENV=development dotenv -e .env nodemon --watch './src/**/*' --watch './config/config.yml' --signal SIGTERM --exec tsx ./src/app.ts",
     "start:prod": "cross-env NODE_ENV=production node build/app.js",
-    "build:prod": "tsc && npx swc ./src -d build",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts ."
+    "build:prod": "tsc && npx swc ./src -d build && echo 'Build completed!'",
+    "lint": "eslint --cache --cache-location './node_modules/.cache/.eslintcache' --ext .ts .",
+    "pmd": "prisma migrate dev --name initial_migration",
+    "pgc": "prisma generate",
+    "prepare": "yarn pgc && echo 'Prisma client generated!'"
+  },
+  "prisma": {
+    "schema": "./prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +29,6 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "nodemon": "^3.1.9",
-    "prisma": "^6.2.1",
     "yaml": "^2.7.0",
     "zod": "^3.24.1"
   },
@@ -39,6 +44,7 @@
     "@types/lodash": "^4.17.14",
     "@types/node": "^22.10.5",
     "dotenv-cli": "^8.0.0",
+    "prisma": "^6.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   }

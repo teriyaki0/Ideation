@@ -25,7 +25,7 @@ const configSchema = z.object({
 
 export type Config = z.infer<typeof configSchema>;
 
-const defaultConfigPath = "config/config.yml";
+const defaultConfigPath = "./config.yml";
 
 const parseConfig = (): Config => {
   const configAbsPath = path.resolve(process.cwd(), defaultConfigPath);
