@@ -12,6 +12,11 @@ export type ViewIdeaRouteParams = typeof viewIdeaRouteParams;
 export const getViewIdeaRoute = ({ ideaNick }: ViewIdeaRouteParams) =>
   `/ideas/${ideaNick}`;
 
+export const editIdeaRouteParams = getRouteParams({ ideaNick: true });
+export type EditIdeaRouteParams = typeof editIdeaRouteParams;
+export const getEditIdeaRoute = ({ ideaNick }: ViewIdeaRouteParams) =>
+  `/ideas/${ideaNick}/edit`;
+
 export const getNewIdeaRoute = () => "/ideas/new";
 export const getSignUpRoute = () => "/sign-up";
 export const getSignInRoute = () => "/sign-in";

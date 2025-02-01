@@ -4,6 +4,7 @@ import * as routes from "./lib/routes";
 import { TrpcProvider } from "./lib/trpc.tsx";
 
 import { AllIdeasPage } from "./pages/AllIdeasPage";
+import { EditIdeaPage } from "./pages/EditIdeaPage/index.tsx";
 import { NewIdeaPage } from "./pages/NewIdeaPage/index.tsx";
 
 import { SignInPage } from "./pages/SignInPage/index.tsx";
@@ -40,6 +41,10 @@ function App() {
               <Route
                 path={routes.getSignOutRoute()}
                 element={<NewIdeaPage />}
+              />
+              <Route
+                path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)}
+                element={<EditIdeaPage />}
               />
             </Route>
           </Routes>

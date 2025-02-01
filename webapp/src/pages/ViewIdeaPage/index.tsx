@@ -1,7 +1,8 @@
 import { format } from "date-fns";
 import { useParams } from "react-router-dom";
+import { LinkButton } from "../../components/Button";
 import { Segment } from "../../components/Segment";
-import { type ViewIdeaRouteParams } from "../../lib/routes";
+import { getEditIdeaRoute, type ViewIdeaRouteParams } from "../../lib/routes";
 import { trpc } from "../../lib/trpc";
 
 import styles from "./index.module.scss";
@@ -30,10 +31,16 @@ export const ViewIdeaPage = () => {
       <div className={styles.createdAt}>
         Created At: {format(data.idea.createdAt, "yyyy-MM-dd")}
       </div>
+      <div>
+        Author: <b>{data.idea.author.nick}</b>
+      </div>
       <div
         className={styles.text}
         dangerouslySetInnerHTML={{ __html: data.idea.text }}
       />
+      <div className={styles.edit}>
+        <LinkButton to={getEditIdeaRoute({ ideaNick })}>Edit</LinkButton>
+      </div>
     </Segment>
   );
 };
