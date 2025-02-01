@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
+import { Idea } from "../../components/Idea";
 import { Segment } from "../../components/Segment";
-import { getViewIdeaRoute } from "../../lib/routes";
 import { trpc } from "../../lib/trpc";
 import styles from "./index.module.scss";
 
@@ -18,20 +17,13 @@ export const AllIdeasPage = () => {
     <Segment title="All Ideas">
       <div className={styles.ideas}>
         {data.ideas.map((idea) => (
-          <div className={styles.idea} key={idea.nick}>
-            <Segment
-              title={
-                <Link
-                  className={styles.link}
-                  to={getViewIdeaRoute({ ideaNick: idea.nick })}
-                >
-                  {idea.name}
-                </Link>
-              }
-              size={2}
-              description={idea.description}
-            />
-          </div>
+          <Idea
+            key={idea.nick}
+            name={idea.name}
+            nick={idea.nick}
+            description={idea.description}
+            createdAt={idea.createdAt}
+          />
         ))}
       </div>
     </Segment>

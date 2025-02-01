@@ -1,0 +1,15 @@
+@use "../../styles/vars" as *;
+@use "../../styles/mixins" as *;
+
+.idea {
+  margin-bottom: 20px;
+  border-radius: $borderRadiusBig;
+  border: $gray 1px solid;
+  padding: 25px 25px;
+  color: $black;
+
+  .createdAt {
+    margin-top: 6px;
+    @include text;
+  }
+}

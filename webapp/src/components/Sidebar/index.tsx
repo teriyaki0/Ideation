@@ -1,11 +1,19 @@
 import cn from "classnames";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getAllIdeasRoute, getNewIdeaRoute } from "../../lib/routes";
+import {
+  getAllIdeasRoute,
+  getNewIdeaRoute,
+  getSignInRoute,
+  getSignOutRoute,
+  getSignUpRoute,
+} from "../../lib/routes";
+import { trpc } from "../../lib/trpc";
 import { Segment } from "../Segment";
 import styles from "./index.module.scss";
 
 export const Sidebar = () => {
+  const { data, isLoading, isFetching, isError } = trpc.getMe.useQuery();
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
@@ -51,39 +59,44 @@ export const Sidebar = () => {
                 All Ideas
               </Link>
             </li>
-            <li className={styles.item}>
-              <Link className={styles.link} to={getNewIdeaRoute()}>
-                New Idea
-              </Link>
-            </li>
-            <li className={styles.item}>
-              <Link className={styles.link} to={getNewIdeaRoute()}>
-                Own Ideas
-              </Link>
-            </li>
           </ul>
         </Segment>
         <Segment title="Account">
-          <ul className={styles.list}>
-            <li className={styles.item}>
-              <Link className={styles.link} to={getAllIdeasRoute()}>
-                Profile
-              </Link>
-            </li>
-            <li className={styles.item}>
-              <Link className={styles.link} to={getNewIdeaRoute()}>
-                Settings
-              </Link>
-            </li>
-            <li className={styles.item}>
-              <Link
-                className={cn({ [styles.link]: true, [styles.logout]: true })}
-                to={getNewIdeaRoute()}
-              >
-                Logout
-              </Link>
-            </li>
-          </ul>
+          {isLoading || isFetching || isError ? null : data.me ? (
+            <ul className={styles.list}>
+              <li className={styles.item}>
+                <Link className={styles.link} to={getNewIdeaRoute()}>
+                  Own Ideas
+                </Link>
+              </li>
+              <li className={styles.item}>
+                <Link className={styles.link} to={getNewIdeaRoute()}>
+                  New Idea
+                </Link>
+              </li>
+              <li className={styles.item}>
+                <Link
+                  className={cn({ [styles.link]: true, [styles.logout]: true })}
+                  to={getSignOutRoute()}
+                >
+                  Logout ({data.me.nick})
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className={styles.list}>
+              <li className={styles.item}>
+                <Link className={styles.link} to={getSignInRoute()}>
+                  Sign In
+                </Link>
+              </li>
+              <li className={styles.item}>
+                <Link className={styles.link} to={getSignUpRoute()}>
+                  Sign Up
+                </Link>
+              </li>
+            </ul>
+          )}
         </Segment>
       </div>
     </aside>

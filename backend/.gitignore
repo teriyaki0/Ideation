@@ -11,3 +11,5 @@ logs
 yarn-error.log
 
 pg_data
+
+redis_data

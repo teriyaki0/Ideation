@@ -7,3 +7,5 @@ yarn-error.log
 pg_data
 
 /.env
+
+redis_data

@@ -8,6 +8,8 @@ const breadcrumbNameMap: BreadcrumbMap = {
   "/ideas/new": "New Idea",
   "/profile": "Profile",
   "/settings": "Settings",
+  "/sign-in": "Sign In",
+  "/sign-up": "Sign Up",
 };
 
 const Breadcrumbs: React.FC = () => {

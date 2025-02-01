@@ -2,16 +2,5 @@
 @use "../../styles/_mixins.scss" as *;
 
 .ideas {
-  .idea {
-    padding: 20px;
-    border: 1px solid $black;
-    border-radius: 10px;
-    & + .idea {
-      margin-top: 20px;
-    }
-
-    .link {
-      @include link;
-    }
-  }
+  max-width: 800px;
 }
