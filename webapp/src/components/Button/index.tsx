@@ -2,15 +2,17 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 
+export type ButtonProps = {
+  children: React.ReactNode;
+  loading?: boolean;
+  mode?: "default" | "primary" | "danger";
+};
+
 export const Button = ({
   children,
   loading = false,
   mode = "default",
-}: {
-  children: React.ReactNode;
-  loading?: boolean;
-  mode?: "default" | "primary" | "danger";
-}) => {
+}: ButtonProps) => {
   return (
     <button
       className={cn({
