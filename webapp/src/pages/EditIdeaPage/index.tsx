@@ -1,4 +1,3 @@
-import { type TrpcRouterOutput } from "@ideation/backend/src/router";
 import { zUpdateIdeaTrpcScheme } from "@ideation/backend/src/router/updateIdea/input";
 import { pick } from "lodash";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,14 +8,28 @@ import { Input } from "../../components/Input";
 import { Segment } from "../../components/Segment";
 import { Textarea } from "../../components/Textarea";
 import { useForm } from "../../lib/form";
+import { withPageWrapper } from "../../lib/pageWrapper";
 import { getViewIdeaRoute, type EditIdeaRouteParams } from "../../lib/routes";
 import { trpc } from "../../lib/trpc";
 
-const EditIdeaForm = ({
-  idea,
-}: {
-  idea: NonNullable<TrpcRouterOutput["getIdea"]["idea"]>;
-}) => {
+export const EditIdeaPage = withPageWrapper({
+  authorizedOnly: true,
+  useQuery: () => {
+    const { ideaNick } = useParams() as EditIdeaRouteParams;
+    return trpc.getIdea.useQuery({
+      ideaNick,
+    });
+  },
+  checkExists: ({ queryResult }) => !!queryResult.data.idea,
+  checkExistsMessage: "Idea not found",
+  checkAccess: ({ queryResult, ctx }) =>
+    !!ctx.me && ctx.me.id === queryResult.data.idea?.authorId,
+  checkAccessMessage: "An idea can only be edited by the author",
+  setProps: ({ queryResult }) => ({
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    idea: queryResult.data.idea!,
+  }),
+})(({ idea }) => {
   const navigate = useNavigate();
   const updateIdea = trpc.updateIdea.useMutation();
 
@@ -48,46 +61,4 @@ const EditIdeaForm = ({
       </form>
     </Segment>
   );
-};
-
-export const EditIdeaPage = () => {
-  const { ideaNick } = useParams() as EditIdeaRouteParams;
-
-  const getMeResult = trpc.getMe.useQuery();
-  const getIdeaResult = trpc.getIdea.useQuery({ ideaNick });
-
-  if (
-    getIdeaResult.isLoading ||
-    getIdeaResult.isFetching ||
-    getMeResult.isLoading ||
-    getMeResult.isFetching
-  ) {
-    return <span>Loading...</span>;
-  }
-
-  if (getMeResult.isError) {
-    return <div>Error: {getMeResult.error.message}</div>;
-  }
-
-  if (getIdeaResult.isError) {
-    return <div>Error: {getIdeaResult.error.message}</div>;
-  }
-
-  if (!getIdeaResult.data.idea) {
-    return <div>Not Found Idea 404</div>;
-  }
-
-  const idea = getIdeaResult.data.idea;
-
-  const me = getMeResult.data.me;
-
-  if (!me) {
-    return <div>Only of authorized</div>;
-  }
-
-  if (me.id !== idea.author.id) {
-    return <div>Only of author</div>;
-  }
-
-  return <EditIdeaForm idea={idea} />;
-};
+});

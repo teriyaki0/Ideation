@@ -7,12 +7,15 @@ import { Input } from "../../components/Input";
 import { Segment } from "../../components/Segment";
 import { Textarea } from "../../components/Textarea";
 import { useForm } from "../../lib/form";
+import { withPageWrapper } from "../../lib/pageWrapper";
 import { getAllIdeasRoute } from "../../lib/routes";
 import { trpc } from "../../lib/trpc";
 
 import styles from "./index.module.scss";
 
-export const NewIdeaPage = () => {
+export const NewIdeaPage = withPageWrapper({
+  authorizedOnly: true,
+})(() => {
   const navigate = useNavigate();
   const createIdea = trpc.createIdea.useMutation();
 
@@ -58,4 +61,4 @@ export const NewIdeaPage = () => {
       </Segment>
     </div>
   );
-};
+});

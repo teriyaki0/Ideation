@@ -2,7 +2,7 @@ import cn from "classnames";
 import styles from "./index.module.scss";
 
 export type AlertProps = {
-  mode: "success" | "error";
+  mode: "success" | "error" | "info";
   hidden?: boolean;
   children: React.ReactNode;
 };

@@ -1,6 +1,7 @@
 import cn from "classnames";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useMe } from "../../lib/ctx";
 import {
   getAllIdeasRoute,
   getNewIdeaRoute,
@@ -8,12 +9,11 @@ import {
   getSignOutRoute,
   getSignUpRoute,
 } from "../../lib/routes";
-import { trpc } from "../../lib/trpc";
 import { Segment } from "../Segment";
 import styles from "./index.module.scss";
 
 export const Sidebar = () => {
-  const { data, isLoading, isFetching, isError } = trpc.getMe.useQuery();
+  const me = useMe()
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export const Sidebar = () => {
           </ul>
         </Segment>
         <Segment title="Account">
-          {isLoading || isFetching || isError ? null : data.me ? (
+          {me ? (
             <ul className={styles.list}>
               <li className={styles.item}>
                 <Link className={styles.link} to={getNewIdeaRoute()}>
@@ -79,7 +79,7 @@ export const Sidebar = () => {
                   className={cn({ [styles.link]: true, [styles.logout]: true })}
                   to={getSignOutRoute()}
                 >
-                  Logout ({data.me.nick})
+                  Logout ({me.nick})
                 </Link>
               </li>
             </ul>
