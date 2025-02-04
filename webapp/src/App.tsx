@@ -4,15 +4,16 @@ import { AppContextProvider } from "./lib/ctx.tsx";
 import * as routes from "./lib/routes";
 import { TrpcProvider } from "./lib/trpc.tsx";
 
-import { AllIdeasPage } from "./pages/AllIdeasPage";
-import { EditIdeaPage } from "./pages/EditIdeaPage/index.tsx";
-import { NewIdeaPage } from "./pages/NewIdeaPage/index.tsx";
+import { SignInPage } from "./pages/auth/SignInPage/index.tsx";
+import { SignOutPage } from "./pages/auth/SignOutPage/index.tsx";
+import { SignUpPage } from "./pages/auth/SignUpPage/index.tsx";
+import { AllIdeasPage } from "./pages/ideas/AllIdeasPage/index.tsx";
+import { EditIdeaPage } from "./pages/ideas/EditIdeaPage/index.tsx";
+import { NewIdeaPage } from "./pages/ideas/NewIdeaPage/index.tsx";
 
-import { SignInPage } from "./pages/SignInPage/index.tsx";
-import { SignOutPage } from "./pages/SignOutPage/index.tsx";
-import { SignUpPage } from "./pages/SignUpPage/index.tsx";
+import { ViewIdeaPage } from "./pages/ideas/ViewIdeaPage/index.tsx";
+import { NotFoundPage } from "./pages/other/NotFoundPage/index.tsx";
 
-import { ViewIdeaPage } from "./pages/ViewIdeaPage";
 
 import "./styles/global.scss";
 
@@ -56,6 +57,7 @@ function App() {
                   path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)}
                   element={<EditIdeaPage />}
                 />
+                <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>
           </AppContextProvider>
