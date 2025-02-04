@@ -4,6 +4,7 @@ import { AppContextProvider } from "./lib/ctx.tsx";
 import * as routes from "./lib/routes";
 import { TrpcProvider } from "./lib/trpc.tsx";
 
+import { EditProfilePage } from "./pages/auth/EditProfilePage/index.tsx";
 import { SignInPage } from "./pages/auth/SignInPage/index.tsx";
 import { SignOutPage } from "./pages/auth/SignOutPage/index.tsx";
 import { SignUpPage } from "./pages/auth/SignUpPage/index.tsx";
@@ -13,7 +14,6 @@ import { NewIdeaPage } from "./pages/ideas/NewIdeaPage/index.tsx";
 
 import { ViewIdeaPage } from "./pages/ideas/ViewIdeaPage/index.tsx";
 import { NotFoundPage } from "./pages/other/NotFoundPage/index.tsx";
-
 
 import "./styles/global.scss";
 
@@ -56,6 +56,10 @@ function App() {
                 <Route
                   path={routes.getEditIdeaRoute(routes.editIdeaRouteParams)}
                   element={<EditIdeaPage />}
+                />
+                <Route
+                  path={routes.getEditProfileRoute()}
+                  element={<EditProfilePage />}
                 />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>

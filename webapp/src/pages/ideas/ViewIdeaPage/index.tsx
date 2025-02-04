@@ -26,7 +26,8 @@ export const ViewIdeaPage = withPageWrapper({
       Created At: {format(idea.createdAt, "yyyy-MM-dd")}
     </div>
     <div className={styles.author}>
-      Author: <b>{idea.author.nick}</b>
+      <b>Nick: {idea.author.nick}</b>
+      <b>Name: {idea.author.name}</b>
     </div>
     <div
       className={styles.text}

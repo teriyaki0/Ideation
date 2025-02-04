@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useMe } from "../../lib/ctx";
 import {
   getAllIdeasRoute,
+  getEditProfileRoute,
   getNewIdeaRoute,
   getSignInRoute,
   getSignOutRoute,
@@ -13,7 +14,7 @@ import { Segment } from "../Segment";
 import styles from "./index.module.scss";
 
 export const Sidebar = () => {
-  const me = useMe()
+  const me = useMe();
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
@@ -66,12 +67,12 @@ export const Sidebar = () => {
             <ul className={styles.list}>
               <li className={styles.item}>
                 <Link className={styles.link} to={getNewIdeaRoute()}>
-                  Own Ideas
+                  New Idea
                 </Link>
               </li>
               <li className={styles.item}>
-                <Link className={styles.link} to={getNewIdeaRoute()}>
-                  New Idea
+                <Link className={styles.link} to={getEditProfileRoute()}>
+                  Edit Profile
                 </Link>
               </li>
               <li className={styles.item}>
