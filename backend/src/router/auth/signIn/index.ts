@@ -9,12 +9,12 @@ export const signInTrpcRoute = trpc.procedure
     const user = await ctx.prisma.user.findFirst({
       where: {
         nick: input.nick,
-        password: getPasswordHash(input.nick),
+        password: getPasswordHash(input.password),
       },
     });
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error("User or Password incorrect");
     }
     const token = singJWT(user.id);
 

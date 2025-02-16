@@ -9,6 +9,8 @@ import { NotFoundPage } from "../pages/other/NotFoundPage";
 import { useAppContext, type AppContext } from "./ctx";
 import { getAllIdeasRoute } from "./routes";
 
+class GetAuthorizedMeError extends Error {}
+
 class CheckExistsError extends Error {}
 const checkExistsFn = <T,>(value: T, message?: string): NonNullable<T> => {
   if (!value) {
@@ -23,10 +25,12 @@ const checkAccessFn = <T,>(value: T, message?: string): void => {
     throw new CheckAccessError(message);
   }
 };
+
 type SetPropsProps<TQueryResult extends QueryResult | undefined> =
   HelperProps<TQueryResult> & {
     checkExists: typeof checkExistsFn;
     checkAccess: typeof checkAccessFn;
+    getAuthorizedMe: (message?: string) => NonNullable<AppContext["me"]>;
   };
 type Props = Record<string, any>;
 type QueryResult = UseTRPCQueryResult<any, any>;
@@ -127,11 +131,19 @@ const PageWrapper = <
     }
   }
 
+  const getAuthorizedMe = (message?: string) => {
+    if (!ctx.me) {
+      throw new GetAuthorizedMeError(message);
+    }
+    return ctx.me;
+  };
+
   try {
     const props = setProps?.({
       ...helperProps,
       checkExists: checkExistsFn,
       checkAccess: checkAccessFn,
+      getAuthorizedMe,
     }) as TProps;
     return <Page {...props} />;
   } catch (error) {
@@ -148,6 +160,14 @@ const PageWrapper = <
         <ErrorPageComponent
           title={checkAccessTitle}
           message={error.message || checkAccessMessage}
+        />
+      );
+    }
+    if (error instanceof GetAuthorizedMeError) {
+      return (
+        <ErrorPageComponent
+          title={authorizedOnlyTitle}
+          message={error.message || authorizedOnlyMessage}
         />
       );
     }

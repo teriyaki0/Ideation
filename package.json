@@ -7,8 +7,8 @@
     "webapp"
   ],
   "scripts": {
-    "b": "yarn workspace @ideation/backend",
-    "f": "yarn workspace @ideation/webapp"
+    "backend": "yarn workspace @ideation/backend",
+    "webapp": "yarn workspace @ideation/webapp"
   },
   "devDependencies": {
     "eslint": "^8.47.0",

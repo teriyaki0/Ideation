@@ -12,7 +12,7 @@ export const Segment = ({
   children?: React.ReactNode;
 }) => {
   return (
-    <div className={styles.root}>
+    <div className={styles.segment}>
       {size === 1 ? (
         <h1 className={styles.title}>{title}</h1>
       ) : (

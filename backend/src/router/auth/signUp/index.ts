@@ -19,7 +19,7 @@ export const signUpTrpcRoute = trpc.procedure
     const user = await ctx.prisma.user.create({
       data: {
         nick: input.nick,
-        password: getPasswordHash(input.nick),
+        password: getPasswordHash(input.password),
       },
     });
 

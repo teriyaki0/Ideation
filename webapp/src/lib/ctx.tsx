@@ -19,7 +19,7 @@ export const AppContextProvider = ({
   const { data, error, isLoading, isFetching, isError } = trpc.getMe.useQuery();
 
   return (
-    <AppReactContext.Provider value={{ me: data?.me }}>
+    <AppReactContext.Provider value={{ me: data?.me || null }}>
       {isLoading || isFetching ? (
         <div style={{ maxWidth: "300px", margin: "10px" }}>
           <Alert mode="info">Loading...</Alert>

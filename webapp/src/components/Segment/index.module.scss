@@ -1,7 +1,7 @@
 @use "../../styles/_vars.scss" as *;
 @use "../../styles/_mixins.scss" as *;
 
-.root {
+.segment {
   h1.title {
     @include h1;
   }
@@ -15,5 +15,8 @@
   }
   .content {
     margin-top: 10px;
+  }
+  & + .segment {
+    margin-top: 30px;
   }
 }
