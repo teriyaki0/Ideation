@@ -8,7 +8,7 @@
     "start:prod": "cross-env NODE_ENV=production node build/app.js",
     "build:prod": "tsc && npx swc ./src -d build && echo 'Build completed!'",
     "lint": "eslint --cache --cache-location './node_modules/.cache/.eslintcache' --ext .ts .",
-    "pmd": "prisma migrate dev --name initial_migration",
+    "pmd": "prisma migrate dev",
     "pgc": "prisma generate",
     "prepare": "yarn pgc && echo 'Prisma client generated!'"
   },

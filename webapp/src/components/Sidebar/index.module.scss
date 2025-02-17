@@ -1,23 +1,46 @@
 @use "../../styles/vars" as *;
 @use "../../styles/mixins" as *;
+@use "../../../../node_modules/include-media/dist/include-media" as *;
+
+$breakpoint: "<=761px";
 
 .sidebar {
-  position: sticky; // Добавляем фиксированное позиционирование
-  top: 0; // Привязываем к верхнему краю
+  position: sticky;
+  top: 0;
   left: 0;
   height: 100vh;
+  width: 70px;
   padding: 25px;
   box-sizing: border-box;
-  transition: width 0.3s ease, padding 0.3s ease;
+
+  background: $white;
+  overflow: hidden;
+
   &.open {
     width: 335px;
   }
+
   .burger {
-    @include link;
-    margin-bottom: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 20;
 
     svg {
+      width: 30px;
+      height: 30px;
       fill: $blue;
+      transition: fill 0.3s ease;
+
       &:hover {
         fill: $pink;
       }
@@ -25,6 +48,7 @@
   }
 
   .menu {
+    margin-top: 60px;
     display: none;
     opacity: 0;
     pointer-events: none;
@@ -34,6 +58,7 @@
       opacity: 1;
       pointer-events: auto;
     }
+
     .list {
       list-style: none;
       padding: 10px 20px;
@@ -55,6 +80,21 @@
           color: $red;
         }
       }
+    }
+  }
+
+  @include media($breakpoint) {
+    height: 75px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: $white;
+
+    &.open {
+      height: 100vh;
+      border-right: 1px solid $gray;
     }
   }
 }

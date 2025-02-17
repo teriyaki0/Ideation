@@ -5,6 +5,7 @@ import {
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ErrorPageComponent } from "../components/ErrorPageComponent";
+import { Loader } from "../components/Loader";
 import { NotFoundPage } from "../pages/other/NotFoundPage";
 import { useAppContext, type AppContext } from "./ctx";
 import { getAllIdeasRoute } from "./routes";
@@ -97,7 +98,7 @@ const PageWrapper = <
   }, [redirectNeeded, navigate]);
 
   if (queryResult?.isLoading || queryResult?.isFetching || redirectNeeded) {
-    return <p>Loading...</p>;
+    return <Loader type="page" />;
   }
 
   if (queryResult?.isError) {

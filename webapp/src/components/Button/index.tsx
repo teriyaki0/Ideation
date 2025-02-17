@@ -5,6 +5,7 @@ import styles from "./index.module.scss";
 export type ButtonProps = {
   children: React.ReactNode;
   loading?: boolean;
+  onClick?: () => void;
   mode?: "default" | "primary" | "danger";
 };
 
@@ -12,6 +13,7 @@ export const Button = ({
   children,
   loading = false,
   mode = "default",
+  onClick,
 }: ButtonProps) => {
   return (
     <button
@@ -19,11 +21,13 @@ export const Button = ({
         [styles.button]: true,
         [styles.disabled]: loading,
         [styles[mode]]: true,
+        [styles.loading]: loading,
       })}
       type="submit"
       disabled={loading}
+      onClick={onClick}
     >
-      {loading ? "...Submitting" : children}
+      <span className={styles.text}>{children}</span>
     </button>
   );
 };

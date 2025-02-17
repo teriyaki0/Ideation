@@ -1,6 +1,7 @@
 import { type TrpcRouterOutput } from "@ideation/backend/src/router";
 import { createContext, useContext } from "react";
 import { Alert } from "../components/Alert";
+import { Loader } from "../components/Loader";
 import { trpc } from "./trpc";
 
 export type AppContext = {
@@ -21,9 +22,7 @@ export const AppContextProvider = ({
   return (
     <AppReactContext.Provider value={{ me: data?.me || null }}>
       {isLoading || isFetching ? (
-        <div style={{ maxWidth: "300px", margin: "10px" }}>
-          <Alert mode="info">Loading...</Alert>
-        </div>
+        <Loader type="page" />
       ) : isError ? (
         <div style={{ maxWidth: "300px", margin: "10px" }}>
           <Alert mode="error">Error: {error.message}</Alert>

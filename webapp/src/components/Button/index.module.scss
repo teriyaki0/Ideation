@@ -10,6 +10,7 @@
   border-radius: $borderRadiusSmall;
   cursor: pointer;
   user-select: none;
+  position: relative;
 
   &:hover {
     background-color: $pink;
@@ -21,7 +22,14 @@
 
   &.disabled {
     pointer-events: none;
-    background-color: #c2c2c2;
+    background-color: #7e83ff;
     color: #000000;
+  }
+  &.loading {
+    @include loader($borderWidth: 3px, $size: 20px, $color: $white);
+
+    .text {
+      opacity: 0;
+    }
   }
 }
